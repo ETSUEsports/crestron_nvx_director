@@ -1,0 +1,23 @@
+{
+  "name": "crestron_nvx_director",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ETSUEsports/crestron_nvx_director.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ETSUEsports/crestron_nvx_director/issues"
+  },
+  "homepage": "https://github.com/ETSUEsports/crestron_nvx_director#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.12.0"
+  }
+}

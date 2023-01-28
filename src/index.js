@@ -6,72 +6,17 @@ const app = express();
 const port = 5434;
 const routes = require('./routes');
 const { sleep } = require('@src/utils/sleep');
-const devices = require('@root/devices.json');
-const NVXDirector = require('@src/structures/NVXDirector');
 const config = require('@root/config.json');
-const { powerDeviceByName } = require('@src/utils/power');
+const NVXDirector = require('@src/structures/NVXDirector');
 
 const director = new NVXDirector(config.NVX_DIRECTOR_IP, config.NVX_DIRECTOR_USERNAME, config.NVX_DIRECTOR_PASSWORD);
 director.connect();
 
+// Mount routes
 routes(app);
+
+// Give the app instance the director object
 app.director = director;
-app.post('/setup/gameday', async (req, res) => {
-  // TX: Spare1 -> RX: Cave PGM 1
-  director.route(devices.TX.Spare1[0], devices.RX.CavePGM1[0]);
-  // TX: Rack PC 1 -> RX: Cave PGM 2
-  director.route(devices.TX.RackPC1[0], devices.RX.CavePGM2[0]);
-  // TX: Loose 1 -> RX: Cave PGM 3
-  director.route(devices.TX.Loose1[0], devices.RX.CavePGM3[0]);
-  // TX: Loose 2 -> RX: Cave PGM 4
-  director.route(devices.TX.Loose2[0], devices.RX.CavePGM4[0]);
-  // TX: Spare1 -> RX: Booth Table
-  director.route(devices.TX.Spare1[0], devices.RX.BoothTable[0]);
-  // TX: Streaming PC -> RX: Booth Wall
-  director.route(devices.TX.StreamingPC[0], devices.RX.BoothWall[0]);
-  // TX: Rack PC 1 -> RX: Confidence L
-  director.route(devices.TX.RackPC1[0], devices.RX.ConfidenceL[0]);
-  // TX: Rack PC 2 -> RX: Confidence R
-  director.route(devices.TX.RackPC2[0], devices.RX.ConfidenceR[0]);
-  // Power on Booth Wall
-  powerDeviceByName('BoothWall', 'on');
-  // Power on Booth Table
-  powerDeviceByName('BoothTable', 'on');
-  // Power on Confidence L
-  powerDeviceByName('ConfidenceL', 'on');
-  // Power on Confidence R
-  powerDeviceByName('ConfidenceR', 'on');
-
-  res.sendStatus(200);
-})
-app.post('/setup/cave', async (req, res) => {
-  // TX: Brightsign -> RX: Cave PGM 1
-  director.route(devices.TX.Brightsign[0], devices.RX.CavePGM1[0]);
-  // TX: Brightsign -> RX: Cave PGM 2
-  director.route(devices.TX.Brightsign[0], devices.RX.CavePGM2[0]);
-  // TX: Brightsign -> RX: Cave PGM 3
-  director.route(devices.TX.Brightsign[0], devices.RX.CavePGM3[0]);
-  // TX: Brightsign -> RX: Cave PGM 4
-  director.route(devices.TX.Brightsign[0], devices.RX.CavePGM4[0]);
-  // TX: Streaming PC -> RX: Booth Table
-  director.route(devices.TX.StreamingPC[0], devices.RX.BoothTable[0]);
-  // TX: Streaming PC -> RX: Booth Wall
-  director.route(devices.TX.StreamingPC[0], devices.RX.BoothWall[0]);
-  // TX: Confidence L Feed -> RX: Confidence L
-  director.route(devices.TX.ConfidenceLFeed[0], devices.RX.ConfidenceL[0]);
-  // TX: Confidence L Feed -> RX: Confidence R
-  director.route(devices.TX.ConfidenceRFeed[0], devices.RX.ConfidenceR[0]);
-  // Power off Booth Wall
-  powerDeviceByName('BoothWall', 'off');
-  // Power off Booth Table
-  powerDeviceByName('BoothTable', 'off');
-  // Power off Confidence L
-  powerDeviceByName('ConfidenceL', 'off');
-  // Power off Confidence R
-  powerDeviceByName('ConfidenceR', 'off');
-
-  res.sendStatus(200);
-})
 
 // Start the server
 app.listen(port, () => {

@@ -1,22 +1,22 @@
 {
-    "name": "Basic Cave",
-    "description": "Everyday cave setup for ETSU.",
-    "routing": {
-        "CavePGM1": "Brightsign",
-        "CavePGM2": "Brightsign",
-        "CavePGM3": "Brightsign",
-        "CavePGM4": "Brightsign",
-        "ConfidenceL": "ConfidenceLFeed",
-        "ConfidenceR": "ConfidenceRFeed",
-        "BoothWall": "StreamingPC",
-        "BoothTable": "StreamingPC",
-        "CoachStation": "RackPC1"
-    },
-    "power": {
-        "ConfidenceL": "off",
-        "ConfidenceR": "off",
-        "BoothWall": "off",
-        "BoothTable": "off",
-        "CoachStation": "off"
-    }
+    "name": "Cave Basic",
+    "description": "Basic Cave Signage Setup",
+    "routing": [
+        {"rx": "CavePGM1", "tx": "Brightsign"},
+        {"rx": "CavePGM2", "tx": "Brightsign"},
+        {"rx": "CavePGM3", "tx": "Brightsign"},
+        {"rx": "CavePGM4", "tx": "Brightsign"},
+        {"rx": "ConfidenceL", "tx": "ConfidenceLFeed"},
+        {"rx": "ConfidenceR", "tx": "ConfidenceRFeed"},
+        {"rx": "BoothWall", "tx": "StreamingPC"},
+        {"rx": "BoothTable", "tx": "StreamingPC"},
+        {"rx": "CoachStation", "tx": "RackPC1"}
+    ],
+    "power": [
+        {"rx": "ConfidenceL", "state": "off"},
+        {"rx": "ConfidenceR", "state": "off"},
+        {"rx": "BoothWall", "state": "off"},
+        {"rx": "BoothTable", "state": "off"},
+        {"rx": "CoachStation", "state": "off"}
+    ]
 }

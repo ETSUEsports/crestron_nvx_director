@@ -1,22 +1,22 @@
 {
     "name": "Esports Gameday",
     "description": "Esports Gameday Setup",
-    "routing": {
-        "CavePGM1": "Spare1",
-        "CavePGM2": "RackPC1",
-        "CavePGM3": "Loose1",
-        "CavePGM4": "Loose2",
-        "ConfidenceL": "RackPC1",
-        "ConfidenceR": "RackPC2",
-        "BoothWall": "StreamingPC",
-        "BoothTable": "Spare1",
-        "CoachStation": "Spare1"
-    },
-    "power": {
-        "ConfidenceL": "on",
-        "ConfidenceR": "on",
-        "BoothWall": "on",
-        "BoothTable": "on",
-        "CoachStation": "off"
-    }
+    "routing": [
+        {"rx": "CavePGM1", "tx": "Spare1"},
+        {"rx": "CavePGM2", "tx": "RackPC1"},
+        {"rx": "CavePGM3", "tx": "Loose1"},
+        {"rx": "CavePGM4", "tx": "Loose2"},
+        {"rx": "ConfidenceL", "tx": "RackPC1"},
+        {"rx": "ConfidenceR", "tx": "RackPC2"},
+        {"rx": "BoothWall", "tx": "StreamingPC"},
+        {"rx": "BoothTable", "tx": "Spare1"},
+        {"rx": "CoachStation", "tx": "Spare1"}
+    ],
+    "power": [
+        {"rx": "ConfidenceL", "state": "on"},
+        {"rx": "ConfidenceR", "state": "on"},
+        {"rx": "BoothWall", "state": "on"},
+        {"rx": "BoothTable", "state": "on"},
+        {"rx": "CoachStation", "state": "off"}
+    ]
 }

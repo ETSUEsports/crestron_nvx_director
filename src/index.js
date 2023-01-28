@@ -7,8 +7,15 @@ const port = 5434;
 const routes = require('./routes');
 const { sleep } = require('@src/utils/sleep');
 const devices = require('@root/devices.json');
+const NVXDirector = require('@src/structures/NVXDirector');
+const config = require('@root/config.json');
+const { powerDeviceByName } = require('@src/utils/power');
+
+const director = new NVXDirector(config.NVX_DIRECTOR_IP, config.NVX_DIRECTOR_USERNAME, config.NVX_DIRECTOR_PASSWORD);
+director.connect();
 
 routes(app);
+app.director = director;
 app.post('/setup/gameday', async (req, res) => {
   // TX: Spare1 -> RX: Cave PGM 1
   director.route(devices.TX.Spare1[0], devices.RX.CavePGM1[0]);

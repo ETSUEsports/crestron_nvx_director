@@ -23,7 +23,8 @@ class NVXDirector {
             });
             this.token = loginResult.data.token;
             // Connect to NVX Director WebSocket
-            socket.send(base64encode(`{"Command":"WSLogin","username":"${base64encode(this.username)}","token":"${this.token}"}`));
+            this.socket.send(base64encode(`{"Command":"WSLogin","username":"${base64encode(this.username)}","token":"${this.token}"}`));
+            this.getDomains();
         }
         this.socket.addEventListener('message', (event) => {
             const reply = JSON.parse(base64decode(event.data));
@@ -45,12 +46,40 @@ class NVXDirector {
         this.socket.send(command);
     }
     async route(tx, rx) {
-        this.socket.send(base64encode(`{"Command":"SetRoute","DomainID":0,"TX":"${tx}","RX":"${rx}","SetRoute":"1"}`));
+        const promise = new Promise((resolve) => {
+            const targetRX = this.domains[0].Receivers.find(obj => {
+                return obj.MAC == rx;
+            });
+            const targetTX = this.domains[0].Transmitters.find(obj => {
+                return obj.MAC == tx;
+            });
+            if(targetRX.MAddr == targetTX.MAddr){
+                resolve({error: true, errorMessage: "Already routed"});
+            }else{
+                this.socket.send(base64encode(`{"Command":"SetRoute","DomainID":0,"TX":"${tx}","RX":"${rx}","SetRoute":"1"}`));
+                sleep(1000).then(() => {
+                    const targetRX = this.domains[0].Receivers.find(obj => {
+                        return obj.MAC == rx;
+                    });
+                    const targetTX = this.domains[0].Transmitters.find(obj => {
+                        return obj.MAC == tx;
+                    });
+                    if(targetRX.MAddr == targetTX.MAddr){
+                        resolve({error: false});
+                    }else{
+                        resolve({error: true});
+                    }
+                });
+            }
+        });
+        return promise;
     }
     async getDomains() {
         const promise = new Promise((resolve) => {
             this.socket.send(base64encode(`{"Command":"GetDomains"}`));
-            sleep(500).then(() => {resolve(this.domains);});
+            sleep(500).then(() => {
+                resolve(this.domains);
+            });
         });
         return promise;
     }

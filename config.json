@@ -1,0 +1,7 @@
+{
+    "NVX_DIRECTOR_IP": "172.16.5.216",
+    "NVX_DIRECTOR_USERNAME": "admin",
+    "NVX_DIRECTOR_PASSWORD": "admin",
+    "TF3_IP": "172.16.5.210",
+    "TF3_PORT": 49280
+}

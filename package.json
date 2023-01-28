@@ -2,8 +2,11 @@
   "name": "crestron_nvx_director",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
+    "serve": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "streamdeck": "node src/index.js streamdeck",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,7 +20,11 @@
   },
   "homepage": "https://github.com/ETSUEsports/crestron_nvx_director#readme",
   "dependencies": {
+    "axios": "^1.2.5",
+    "axios-cookiejar-support": "^4.0.6",
     "express": "^4.18.2",
+    "nodemon": "^2.0.20",
+    "tough-cookie": "^4.1.2",
     "ws": "^8.12.0"
   }
 }

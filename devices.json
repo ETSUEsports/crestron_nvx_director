@@ -11,7 +11,6 @@
         "ConfidenceRFeed": ["00107FDE8FFB", "172.16.5.26"]
     },
     "RX":{
-        "EtrPreview": ["00107FD5DEEC"],
         "CavePGM1": ["00107FE096D8", "172.16.5.53"],
         "CavePGM2": ["00107FD8A58C", "172.16.5.54"],
         "CavePGM3": ["00107FD8A1AB", "172.16.5.55"],

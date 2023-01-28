@@ -1,0 +1,22 @@
+{
+    "name": "Esports Gameday",
+    "description": "Esports Gameday Setup",
+    "routing": {
+        "CavePGM1": "Spare1",
+        "CavePGM2": "RackPC1",
+        "CavePGM3": "Loose1",
+        "CavePGM4": "Loose2",
+        "ConfidenceL": "RackPC1",
+        "ConfidenceR": "RackPC2",
+        "BoothWall": "StreamingPC",
+        "BoothTable": "Spare1",
+        "CoachStation": "Spare1"
+    },
+    "power": {
+        "ConfidenceL": "on",
+        "ConfidenceR": "on",
+        "BoothWall": "on",
+        "BoothTable": "on",
+        "CoachStation": "off"
+    }
+}

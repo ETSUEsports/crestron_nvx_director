@@ -12,7 +12,6 @@ const socket = new ws('wss://172.16.5.216/');
 const { wrapper } = require('axios-cookiejar-support');
 const { CookieJar } = require('tough-cookie');
 const querystring = require('node:querystring');
-const net = require('net');
 
 socket.onopen = async () => {
   // Login to NVX Director and get Token

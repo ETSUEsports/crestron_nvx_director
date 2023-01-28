@@ -4,32 +4,11 @@ require('module-alias/register');
 const express = require('express');
 const app = express();
 const port = 5434;
+const routes = require('./routes');
 const { sleep } = require('@src/utils/sleep');
-const config = require('@root/config.json');
 const devices = require('@root/devices.json');
-const NVXDirector = require('@src/structures/NVXDirector');
-const NVXDevice = require('@src/structures/NVXDevice');
 
-const director = new NVXDirector(config.NVX_DIRECTOR_IP, config.NVX_DIRECTOR_USERNAME, config.NVX_DIRECTOR_PASSWORD);
-director.connect();
-
-
-app.get('/connect', async (req, res) => {
-  director.connect();
-  res.sendStatus(200);
-});
-
-
-app.get('/domains', async (req, res) => {
-  director.getDomains();
-  res.sendStatus(200);
-});
-
-app.post('/domain/routing/mac/:srcMAC/:dstMAC', async (req, res) => {
-  director.route(req.params.srcMAC, req.params.dstMAC);
-  res.sendStatus(200);
-});
-
+routes(app);
 app.post('/setup/gameday', async (req, res) => {
   // TX: Spare1 -> RX: Cave PGM 1
   director.route(devices.TX.Spare1[0], devices.RX.CavePGM1[0]);
@@ -86,20 +65,6 @@ app.post('/setup/cave', async (req, res) => {
 
   res.sendStatus(200);
 })
-
-app.post('/device/:deviceName/:state', async (req, res) => {
-  powerDeviceByName(req.params.deviceName, req.params.state);
-  res.sendStatus(200);
-})
-
-
-// Function to provide power commands
-async function powerDeviceByName(deviceName, state){
-  const device = new NVXDevice(devices.RX[deviceName][1], config.NVX_DIRECTOR_USERNAME, config.NVX_DIRECTOR_PASSWORD);
-  await device.connect();
-  sleep(1000).then(() => state == "on" ? device.send('{"Device":{"CustomControlPortCommands":{"Cec":{"PortList":{"Port1":{"CommandList":{"PowerOn":{"Test":true}}}}}}}}') : device.send('{"Device":{"CustomControlPortCommands":{"Cec":{"PortList":{"Port1":{"CommandList":{"PowerOff":{"Test":true}}}}}}}}'));
-}
-
 
 // Start the server
 app.listen(port, () => {

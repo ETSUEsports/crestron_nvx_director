@@ -1,4 +1,4 @@
-const nvx = require('./nvx');
+const sleep = require('./sleep');
 const base64 = require('./base64');
 
-module.exports = {nvx, base64};
+module.exports = {sleep, base64};

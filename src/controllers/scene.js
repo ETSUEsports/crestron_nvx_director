@@ -7,7 +7,7 @@ function recall(req, res) {
 
     scene.routing.forEach(route => {
         console.log(`Routing TX:${route.tx} to RX:${route.rx}`);
-        req.app.director.route(devices.TX[route.tx][0], devices.RX[route.rx][0]);
+        req.app.director.routeByMAC(devices.TX[route.tx][0], devices.RX[route.rx][0]);
     });
     scene.power.forEach(display => {
         console.log(`Powering ${display.state} display:${display.rx}`);

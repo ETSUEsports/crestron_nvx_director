@@ -2,6 +2,7 @@ const axios = require('axios');
 const ws = require('ws');
 const { base64encode, base64decode } = require('@src/utils/base64');
 const { sleep } = require('@src/utils/sleep');
+const devices = require('@root/devices.json');
 
 class NVXDirector {
     constructor(ip, username, password) {
@@ -45,7 +46,38 @@ class NVXDirector {
     async send(command) {
         this.socket.send(command);
     }
-    async route(tx, rx) {
+    async routeByMAC(tx, rx) {
+        const promise = new Promise((resolve) => {
+            const targetRX = this.domains[0].Receivers.find(obj => {
+                return obj.MAC == rx;
+            });
+            const targetTX = this.domains[0].Transmitters.find(obj => {
+                return obj.MAC == tx;
+            });
+            if(targetRX.MAddr == targetTX.MAddr){
+                resolve({error: true, errorMessage: "Already routed"});
+            }else{
+                this.socket.send(base64encode(`{"Command":"SetRoute","DomainID":0,"TX":"${tx}","RX":"${rx}","SetRoute":"1"}`));
+                sleep(1000).then(() => {
+                    const targetRX = this.domains[0].Receivers.find(obj => {
+                        return obj.MAC == rx;
+                    });
+                    const targetTX = this.domains[0].Transmitters.find(obj => {
+                        return obj.MAC == tx;
+                    });
+                    if(targetRX.MAddr == targetTX.MAddr){
+                        resolve({error: false});
+                    }else{
+                        resolve({error: true});
+                    }
+                });
+            }
+        });
+        return promise;
+    }
+    async routeByName(txName, rxName) {
+        const tx = devices.TX[txName][0];
+        const rx = devices.RX[rxName][0];
         const promise = new Promise((resolve) => {
             const targetRX = this.domains[0].Receivers.find(obj => {
                 return obj.MAC == rx;

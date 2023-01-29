@@ -8,9 +8,14 @@ function getDomains(req, res) {
     });
 }
 function setRoutingByMAC(req, res) {
-    req.app.director.route(req.params.srcMAC, req.params.dstMAC).then((result) => {
+    req.app.director.routeByMAC(req.params.srcMAC, req.params.dstMAC).then((result) => {
+        res.json(result);
+    });
+}
+function setRoutingByName(req, res) {
+    req.app.director.routeByName(req.params.src, req.params.dst).then((result) => {
         res.json(result);
     });
 }
 
-module.exports = { connect, getDomains, setRoutingByMAC }
+module.exports = { connect, getDomains, setRoutingByMAC, setRoutingByName }

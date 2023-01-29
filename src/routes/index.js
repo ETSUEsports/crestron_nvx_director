@@ -8,9 +8,9 @@ module.exports = app => {
 	app.use(scene);
 	app.get('*', function(req, res) {
 		res.status(404);
-		return res.json(apiResponse({
+		return res.json({
 			error: true,
-			message: 'Error 404 Route not found',
-		}));
+			errorMessage: 'Error 404 Route not found',
+		});
 	});
 };

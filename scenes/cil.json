@@ -1,0 +1,11 @@
+{
+    "name": "Esports Collegiate iRacing League Setup",
+    "description": "Esports CiL Left Monitor Video",
+    "routing": [
+        {"rx": "CavePGM1", "tx": "RackPC1"},
+        {"rx": "CoachStation", "tx": "RackPC1"}
+    ],
+    "power": [
+        {"rx": "CoachStation", "state": "on"}
+    ]
+}

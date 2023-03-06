@@ -1,0 +1,14 @@
+{
+    "name": "Esports No Wall",
+    "description": "Esports Gameday without Video Wall",
+    "routing": [
+        {"rx": "CavePGM3", "tx": "Loose1"},
+        {"rx": "CavePGM4", "tx": "Loose2"},
+        {"rx": "BoothWall", "tx": "StreamingPC"},
+        {"rx": "BoothTable", "tx": "Spare2"}
+    ],
+    "power": [
+        {"rx": "BoothWall", "state": "on"},
+        {"rx": "BoothTable", "state": "on"}
+    ]
+}

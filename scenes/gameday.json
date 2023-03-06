@@ -6,17 +6,16 @@
         {"rx": "CavePGM2", "tx": "RackPC1"},
         {"rx": "CavePGM3", "tx": "Loose1"},
         {"rx": "CavePGM4", "tx": "Loose2"},
-        {"rx": "ConfidenceL", "tx": "RackPC1"},
-        {"rx": "ConfidenceR", "tx": "RackPC2"},
+        {"rx": "ConfidenceL", "tx": "Spare1"},
+        {"rx": "ConfidenceR", "tx": "Spare1"},
         {"rx": "BoothWall", "tx": "StreamingPC"},
-        {"rx": "BoothTable", "tx": "Spare1"},
-        {"rx": "CoachStation", "tx": "Spare1"}
+        {"rx": "BoothTable", "tx": "Spare2"},
+        {"rx": "CoachStation", "tx": "Spare2"}
     ],
     "power": [
-        {"rx": "ConfidenceL", "state": "on"},
-        {"rx": "ConfidenceR", "state": "on"},
+        {"rx": "ConfidenceL", "state": "off"},
+        {"rx": "ConfidenceR", "state": "off"},
         {"rx": "BoothWall", "state": "on"},
-        {"rx": "BoothTable", "state": "on"},
-        {"rx": "CoachStation", "state": "off"}
+        {"rx": "BoothTable", "state": "on"}
     ]
 }

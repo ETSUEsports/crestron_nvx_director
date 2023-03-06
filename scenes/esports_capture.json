@@ -1,0 +1,11 @@
+{
+    "name": "Esports Video Capture",
+    "description": "Cave PGM 3 and 4 for USB HDMI capture for Esports",
+    "routing": [
+        {"rx": "CavePGM3", "tx": "Loose1"},
+        {"rx": "CavePGM4", "tx": "Loose2"}
+    ],
+    "power": [
+        {"rx": "CoachStation", "state": "off"}
+    ]
+}
